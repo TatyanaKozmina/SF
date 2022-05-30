@@ -1,0 +1,5 @@
+name		TKTrialBot
+username	TKTrial_Bot
+
+Use this token to access the HTTP API:
+5424249902:AAGJ0C9LdG38a1ZuBMqLennz9DhWAbmnWX8
