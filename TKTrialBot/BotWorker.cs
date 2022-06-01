@@ -5,8 +5,8 @@ namespace TKTrialBot
 {
     public class BotWorker
     {
-        private ITelegramBotClient botClient;
-        private BotMessageLogic logic;
+        private ITelegramBotClient? botClient;
+        private BotMessageLogic? logic;
 
         public void Initialize()
         {
@@ -18,6 +18,7 @@ namespace TKTrialBot
         {
             botClient.OnMessage += Bot_OnMessage;
             botClient.StartReceiving();
+            //botClient.OnCallbackQuery += Bot_Callback;
         }
 
         public void Stop()
@@ -31,14 +32,32 @@ namespace TKTrialBot
             {
                 await logic.Response(e);
             }
-            //if (e.Message.Text != null)
-            //{
-            //    Console.WriteLine($"Получено сообщение в чате: {e.Message.Chat.Id}.");
-
-            //    await botClient.SendTextMessageAsync(
-            //    chatId: e.Message.Chat, text: "Вы написали:\n" + e.Message.Text);
-            //}
         }
+
+        //private async void Bot_Callback(object sender, CallbackQueryEventArgs e)
+        //{
+        //    var text = string.Empty;
+
+        //    switch (e.CallbackQuery.Data)
+        //    {
+        //        case "pushkin":
+        //            text = @"Я помню чудное мгновенье:
+        //                            Передо мной явилась ты,
+        //                            Как мимолетное виденье,
+        //                            Как гений чистой красоты.";
+        //            break;
+        //        case "esenin":
+        //            text = @"Не каждый умеет петь,
+        //                        Не каждому дано яблоком
+        //                        Падать к чужим ногам.";
+        //            break;
+        //        default:
+        //            break;
+        //    }
+
+        //    await botClient.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, text);
+        //    await botClient.AnswerCallbackQueryAsync(e.CallbackQuery.Id);
+        //}
     }
 }
 

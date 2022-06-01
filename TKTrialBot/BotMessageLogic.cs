@@ -11,7 +11,7 @@ namespace TKTrialBot
 
         public BotMessageLogic(ITelegramBotClient botClient)
         {
-            messenger = new Messenger();
+            messenger = new Messenger(botClient);
             chatList = new Dictionary<long, Conversation>();
             this.botClient = botClient;
         }
@@ -31,14 +31,7 @@ namespace TKTrialBot
 
             chat.AddMessage(e.Message);
 
-            await SendTextMessage(chat);
-        }
-
-        private async Task SendTextMessage(Conversation chat)
-        {
-            var text = messenger.CreateTextMessage(chat);
-
-            await botClient.SendTextMessageAsync(chatId: chat.GetId(), text: text);
+            await messenger.MakeAnswer(chat);
         }
     }
 }

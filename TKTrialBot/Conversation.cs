@@ -19,21 +19,23 @@ namespace TKTrialBot
             telegramMessages.Add(message);
         }
 
-        public long GetId() => telegramChat.Id;         
+        public long GetId() => telegramChat.Id;
 
-        public List<string> GetTextMessages()
-        {
-            var textMessages = new List<string>();
+        public string GetLastMessage() => telegramMessages[telegramMessages.Count - 1].Text;
 
-            foreach (var message in telegramMessages)
-            {
-                if (message.Text != null)
-                {
-                    textMessages.Add(message.Text);
-                }
-            }
+        //public List<string> GetTextMessages()
+        //{
+        //    var textMessages = new List<string>();
 
-            return textMessages;
-        }
+        //    foreach (var message in telegramMessages)
+        //    {
+        //        if (message.Text != null)
+        //        {
+        //            textMessages.Add(message.Text);
+        //        }
+        //    }
+
+        //    return textMessages;
+        //}
     }
 }
