@@ -28,9 +28,16 @@ namespace TKTrialBot
 
             if (CommandProcessor.IsCommand(lastmessage))
             {
-                /// Пользователь ввёл команду - /nnnn
-                currentCommand = CommandProcessor.SetCurrentCommand(lastmessage);
-                await ExecCommand(chat, currentCommand);
+                if (multiQuestionInProcess)
+                {
+                    await SendText(chat, "Предыдущая задача не завершена.");
+                    await SendText(chat, currentQuestion.Question);
+                }
+                else
+                {
+                    currentCommand = CommandProcessor.SetCurrentCommand(lastmessage);
+                    await ExecCommand(chat);
+                }                
             }
             else
             {
@@ -44,6 +51,7 @@ namespace TKTrialBot
                     if (CommandProcessor.NoMoreQuestions(currentCommand))
                     {
                         multiQuestionInProcess = false;
+                        await SendText(chat, CommandProcessor.GetReplyText(currentCommand));
                     }
                     else
                     {
@@ -54,45 +62,34 @@ namespace TKTrialBot
             }
         }
 
-        private async Task ExecCommand(Conversation chat, AbstractCommand command)
+        private async Task ExecCommand(Conversation chat)
         {
-            switch (command.CommandType)
+            switch (currentCommand.CommandType)
             {
                 case CommandType.Text:
-                    var text = CommandProcessor.GetReplyText(command);
-                    await SendText(chat, text);
+                    await SendText(chat, CommandProcessor.GetReplyText(currentCommand));
                     break;
 
                 case CommandType.AddWord:
                     multiQuestionInProcess = true;
                     AddWordStarted?.Invoke(chat);
-                    currentQuestion = CommandProcessor.GetQuestion(command);
+                    currentQuestion = CommandProcessor.GetQuestion(currentCommand);
                     await SendText(chat, currentQuestion.Question);
                     break;
 
                 case CommandType.Save:
                     await chat.SaveDictionaryToFile();
-                    text = CommandProcessor.GetReplyText(command);
-                    await SendText(chat, text);
+                    await SendText(chat, CommandProcessor.GetReplyText(currentCommand));
                     break;
 
                 case CommandType.DeleteWord:
-                    chat.DeleteFromDictionary(CommandProcessor.GetCommandParams(command).First());
-                    text = CommandProcessor.GetReplyText(command);
-                    await SendText(chat, text);
+                    chat.DeleteFromDictionary(CommandProcessor.GetCommandParams(currentCommand).First());
+                    await SendText(chat, CommandProcessor.GetReplyText(currentCommand));
                     break;
 
                 case CommandType.Dictionary:
                     await SendText(chat, chat.ChatDictionary);
-                    break;
-
-                case CommandType.Button:
-                    //    var keys = parser.GetKeyBoard(command);
-                    //    var text = parser.GetInformationalMeggase(command);
-                    //    parser.AddCallback(command, chat);
-
-                    //    await SendTextWithKeyBoard(chat, text, keys);
-                    break;
+                    break;                
             }
         }
 
@@ -102,15 +99,6 @@ namespace TKTrialBot
                   chatId: chat.GetId(),
                   text: text
                 );
-        }
-
-        //private async Task SendTextWithKeyBoard(Conversation chat, string text, InlineKeyboardMarkup keyboard)
-        //{
-        //    await botClient.SendTextMessageAsync(
-        //          chatId: chat.GetId(),
-        //          text: text,
-        //          replyMarkup: keyboard
-        //        );
-        //}        
+        }      
     }
 }

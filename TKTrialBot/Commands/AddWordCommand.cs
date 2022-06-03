@@ -16,7 +16,6 @@
 
         public string ReplyText()
         {
-            //return $"Успешно! Слово {dictionaryItem.EngWord} добавлено в словарь.";
             return $"Успешно! Слово добавлено в словарь.";
         }
     }

@@ -12,6 +12,7 @@ namespace TKTrialBot
         {
             messenger = new Messenger(botClient);
             chatList = new Dictionary<long, Conversation>();
+
             messenger.AddWordStarted += InitDictItem;
             messenger.WordEntered += FillDictItem;
         }

@@ -9,7 +9,6 @@
     public enum CommandType
     {
         Text,
-        Button,
         AddWord,
         Save,
         DeleteWord,
