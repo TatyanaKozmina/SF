@@ -10,6 +10,9 @@
     {
         Text,
         Button,
-        Adding
+        AddWord,
+        Save,
+        DeleteWord,
+        Dictionary
     }
 }

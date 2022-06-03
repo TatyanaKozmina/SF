@@ -9,7 +9,7 @@ namespace TKTrialBot
         private ITelegramBotClient botClient;
 
         private bool multiQuestionInProcess;
-        private AbstractCommand currentCommand;
+        private AbstractCommand? currentCommand;
 
         public Messenger(ITelegramBotClient botClient)
         {
@@ -29,8 +29,15 @@ namespace TKTrialBot
             {
                 if (multiQuestionInProcess)
                 {
+                    if(currentCommand.CommandType == CommandType.AddWord)
+                        CommandProcessor.FillDictionaryItem(currentCommand, lastmessage);
+
                     if (CommandProcessor.NoMoreQuestions(currentCommand))
+                    {
                         multiQuestionInProcess = false;
+                        if (currentCommand.CommandType == CommandType.AddWord)
+                            chat.AddToDictionary(CommandProcessor.GetDictionaryItem(currentCommand));
+                    }
                     else
                     {
                         var text = CommandProcessor.GetQuestion(currentCommand);
@@ -49,11 +56,27 @@ namespace TKTrialBot
                     await SendText(chat, text);
                     break;
 
-                case CommandType.Adding:
+                case CommandType.AddWord:
                     multiQuestionInProcess = true;
-                    CommandProcessor.InitSubquestions(command);
+                    CommandProcessor.InitCommand(command);
                     text = CommandProcessor.GetQuestion(command);
                     await SendText(chat, text);
+                    break;
+
+                case CommandType.Save:
+                    await chat.SaveDictionaryToFile();
+                    text = CommandProcessor.GetReplyText(command);
+                    await SendText(chat, text);
+                    break;
+
+                case CommandType.DeleteWord:
+                    chat.DeleteFromDictionary(CommandProcessor.GetCommandParams(command).First());
+                    text = CommandProcessor.GetReplyText(command);
+                    await SendText(chat, text);
+                    break;
+
+                case CommandType.Dictionary:
+                    await SendText(chat, chat.ChatDictionary);
                     break;
 
                 case CommandType.Button:

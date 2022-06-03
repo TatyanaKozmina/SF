@@ -1,6 +1,6 @@
 ﻿namespace TKTrialBot.Commands
 {
-    public class SayHiCommand : AbstractCommand, IChatCommandReplyText
+    public class SayHiCommand : AbstractCommand, ICommandReplyText
     {
         public SayHiCommand()
         {

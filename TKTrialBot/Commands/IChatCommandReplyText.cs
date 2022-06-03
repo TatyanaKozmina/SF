@@ -1,6 +1,6 @@
 ﻿namespace TKTrialBot.Commands
 {
-    public interface IChatCommandReplyText
+    public interface ICommandReplyText
     {
         string ReplyText();
     }
