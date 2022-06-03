@@ -9,7 +9,7 @@
             Parameters = new List<string>();
         }
 
-        public List<string> Parameters { get; set; }            
+        public List<string> Parameters { get; set; }
 
         public string ReplyText()
         {

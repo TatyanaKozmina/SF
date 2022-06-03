@@ -12,7 +12,7 @@
             chatCommands.Add(new SaveCommand());
             chatCommands.Add(new DeleteCommand());
             chatCommands.Add(new DictionaryCommand());
-        }        
+        }
 
         public static AbstractCommand SetCurrentCommand(string message)
         {
@@ -38,35 +38,27 @@
         public static bool IsCommand(string message)
         {
             return chatCommands.Exists(r => r.CommandText.StartsWith(message.Split(" ")[0], StringComparison.OrdinalIgnoreCase));
-        }            
+        }
 
         public static string GetReplyText(AbstractCommand command)
         {
             return ((ICommandReplyText)command).ReplyText();
         }
 
-        #region MultiQuestion       
+        #region MultiQuestion          
 
-        public static void InitCommand(AbstractCommand command)
-        {
-            MultiQuestionCommand? mqcommand = command as MultiQuestionCommand;
-            if (mqcommand != null)
-                mqcommand.InitCommand();            
-        }
-
-        public static string GetQuestion(AbstractCommand command)
+        public static SubQuestion? GetQuestion(AbstractCommand command)
         {
             MultiQuestionCommand? mqcommand = command as MultiQuestionCommand;
             if (mqcommand != null)
             {
                 var currentQuestion = mqcommand.Subquestions.Where(x => x.Processed == false).First();
-                var text = currentQuestion.Question;
                 currentQuestion.Processed = true;
 
-                return currentQuestion.Question;
+                return currentQuestion;
             }
             else
-                return string.Empty;
+                return null;
         }
 
         public static bool NoMoreQuestions(AbstractCommand command)
@@ -76,26 +68,7 @@
                 return true;
             else
                 return false;
-        }        
-
-        public static void FillDictionaryItem(AbstractCommand command, string message)
-        {
-            AddWordCommand? addcommand = command as AddWordCommand;
-            if (addcommand != null)
-            {
-                string key = addcommand.Subquestions.Where(x => x.Processed).Last().Key;
-                addcommand.FillDictionaryItemField(key, message);
-            }
-        }
-
-        public static DictionaryItem GetDictionaryItem(AbstractCommand command)
-        {
-            AddWordCommand? addcommand = command as AddWordCommand;
-            if (addcommand != null)
-                return addcommand.GetDictionaryItem();
-            else
-                return null;
-        }
+        }  
 
         #endregion
     }

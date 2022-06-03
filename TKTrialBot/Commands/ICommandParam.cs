@@ -2,6 +2,6 @@
 {
     public interface ICommandParam
     {
-        public List<string> Parameters { get; set; }        
+        public List<string> Parameters { get; set; }
     }
 }

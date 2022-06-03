@@ -1,5 +1,4 @@
 ﻿using Telegram.Bot;
-using Telegram.Bot.Types.ReplyMarkups;
 using TKTrialBot.Commands;
 
 namespace TKTrialBot
@@ -10,6 +9,13 @@ namespace TKTrialBot
 
         private bool multiQuestionInProcess;
         private AbstractCommand? currentCommand;
+        private SubQuestion? currentQuestion;
+
+        public delegate void WordEnteredHandler(Conversation chat, string key, string value);
+        public event WordEnteredHandler WordEntered;
+
+        public delegate void AddWordStartedHandler(Conversation chat);
+        public event AddWordStartedHandler AddWordStarted;
 
         public Messenger(ITelegramBotClient botClient)
         {
@@ -22,6 +28,7 @@ namespace TKTrialBot
 
             if (CommandProcessor.IsCommand(lastmessage))
             {
+                /// Пользователь ввёл команду - /nnnn
                 currentCommand = CommandProcessor.SetCurrentCommand(lastmessage);
                 await ExecCommand(chat, currentCommand);
             }
@@ -29,19 +36,19 @@ namespace TKTrialBot
             {
                 if (multiQuestionInProcess)
                 {
-                    if(currentCommand.CommandType == CommandType.AddWord)
-                        CommandProcessor.FillDictionaryItem(currentCommand, lastmessage);
+                    if (currentCommand.CommandType == CommandType.AddWord)
+                    {
+                        WordEntered?.Invoke(chat, currentQuestion.Key, lastmessage);
+                    }
 
                     if (CommandProcessor.NoMoreQuestions(currentCommand))
                     {
                         multiQuestionInProcess = false;
-                        if (currentCommand.CommandType == CommandType.AddWord)
-                            chat.AddToDictionary(CommandProcessor.GetDictionaryItem(currentCommand));
                     }
                     else
                     {
-                        var text = CommandProcessor.GetQuestion(currentCommand);
-                        await SendText(chat, text);
+                        currentQuestion = CommandProcessor.GetQuestion(currentCommand);
+                        await SendText(chat, currentQuestion.Question);
                     }
                 }
             }
@@ -58,9 +65,9 @@ namespace TKTrialBot
 
                 case CommandType.AddWord:
                     multiQuestionInProcess = true;
-                    CommandProcessor.InitCommand(command);
-                    text = CommandProcessor.GetQuestion(command);
-                    await SendText(chat, text);
+                    AddWordStarted?.Invoke(chat);
+                    currentQuestion = CommandProcessor.GetQuestion(command);
+                    await SendText(chat, currentQuestion.Question);
                     break;
 
                 case CommandType.Save:

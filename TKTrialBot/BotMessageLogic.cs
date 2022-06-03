@@ -12,6 +12,8 @@ namespace TKTrialBot
         {
             messenger = new Messenger(botClient);
             chatList = new Dictionary<long, Conversation>();
+            messenger.AddWordStarted += InitDictItem;
+            messenger.WordEntered += FillDictItem;
         }
 
         public async Task Response(MessageEventArgs e)
@@ -30,6 +32,16 @@ namespace TKTrialBot
             chat.AddMessage(e.Message);
 
             await messenger.MakeAnswer(chat);
+        }
+
+        public void InitDictItem(Conversation chat)
+        {
+            chat.InitDictItem();
+        }
+
+        public void FillDictItem(Conversation chat, string key, string value)
+        {
+            chat.FillDictItem(key, value);
         }
     }
 }

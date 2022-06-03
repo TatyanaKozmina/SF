@@ -9,7 +9,7 @@ namespace TKTrialBot
         private List<Message> telegramMessages;
 
         private List<DictionaryItem> chatDictionary;
-        public string ChatDictionary { get { return GetDictionary(); }  }
+        public string ChatDictionary { get { return GetDictionary(); } }
 
         public Conversation(Chat chat)
         {
@@ -27,13 +27,27 @@ namespace TKTrialBot
 
         public string GetLastMessage() => telegramMessages.Last().Text;
 
-        public void AddToDictionary(DictionaryItem item)
+        public void InitDictItem()
         {
             if (chatDictionary == null)
                 chatDictionary = new List<DictionaryItem>();
+            chatDictionary.Add(new DictionaryItem());
+        }
 
-            if(!chatDictionary.Exists(x => x.RusWord == item.RusWord))
-                chatDictionary.Add(item);
+        public void FillDictItem(string key, string value)
+        {
+            switch (key.ToUpper())
+            {
+                case "RUSWORD":
+                    chatDictionary.Where(x => x.RusWord == null).Last().RusWord = value;
+                    break;
+                case "ENGWORD":
+                    chatDictionary.Where(x => x.EngWord == null).Last().EngWord = value;
+                    break;
+                case "THEME":
+                    chatDictionary.Where(x => x.Theme == null).Last().Theme = value;
+                    break;
+            }
         }
 
         public async Task SaveDictionaryToFile()
@@ -44,7 +58,7 @@ namespace TKTrialBot
         public void DeleteFromDictionary(string rusword)
         {
             if (chatDictionary != null)
-                chatDictionary.Remove(chatDictionary.First(x => x.RusWord == rusword));                
+                chatDictionary.Remove(chatDictionary.First(x => x.RusWord == rusword));
         }
 
         private string GetDictionary()
@@ -53,7 +67,7 @@ namespace TKTrialBot
 
             foreach (var wordItem in chatDictionary)
             {
-                result = result + 
+                result = result +
                          string.Format("{0} {1} {2}", wordItem.RusWord, wordItem.EngWord, wordItem.Theme) +
                          "\n";
             }
