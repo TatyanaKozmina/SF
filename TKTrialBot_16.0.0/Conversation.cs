@@ -15,7 +15,7 @@ namespace TKTrialBot
         {
             telegramChat = chat;
             telegramMessages = new List<Message>();
-            chatDictionary = DictionaryProcessor.LoadFromFile();
+            chatDictionary = DictionaryFileProcessor.LoadFromFile();
         }
 
         public void AddMessage(Message message)
@@ -52,7 +52,7 @@ namespace TKTrialBot
 
         public async Task SaveDictionaryToFile()
         {
-            await DictionaryProcessor.SaveToFile(chatDictionary);
+            await DictionaryFileProcessor.SaveToFile(chatDictionary);
         }
 
         public void DeleteFromDictionary(string rusword)

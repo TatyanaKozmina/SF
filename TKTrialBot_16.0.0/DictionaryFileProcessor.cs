@@ -1,6 +1,6 @@
 ﻿namespace TKTrialBot
 {
-    public static class DictionaryProcessor
+    public static class DictionaryFileProcessor
     {
         private static string filePath = @"C:\MyDictionary.txt";
         public static List<DictionaryItem>? LoadFromFile()
