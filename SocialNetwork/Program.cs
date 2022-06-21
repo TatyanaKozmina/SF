@@ -23,10 +23,10 @@ namespace SocialNetwork
         public static AddFriendView addFriendView;
 
         static void Main(string[] args)
-        {
+        {            
             userService = new UserService();
             messageService = new MessageService();
-            addFriendService = new AddFriendService();
+            addFriendService = new AddFriendService(userService.UserRepository);
 
             mainView = new MainView();
             registrationView = new RegistrationView(userService);

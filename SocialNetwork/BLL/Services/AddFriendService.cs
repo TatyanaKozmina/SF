@@ -9,9 +9,9 @@ namespace SocialNetwork.BLL.Services
     {
         IFriendRepository friendRepository;
         IUserRepository userRepository;
-        public AddFriendService()
+        public AddFriendService(IUserRepository userRepository)
         {
-            userRepository = new UserRepository();
+            this.userRepository = userRepository;
             friendRepository = new FriendRepository();
         }        
 

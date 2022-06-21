@@ -15,6 +15,9 @@ namespace SocialNetwork.BLL.Services
             messageService = new MessageService();
         }
 
+        public IUserRepository UserRepository 
+        { get { return userRepository; } }
+
         public void Register(UserRegistrationData userRegistrationData)
         {
             if (String.IsNullOrEmpty(userRegistrationData.FirstName))
