@@ -27,7 +27,6 @@ namespace FirstApp
             if (user == null || book == null)
                 return;
             user.Books.Add(book);
-            db.SaveChanges();
         }
 
         public List<Book> GetAllBooks()
@@ -35,23 +34,23 @@ namespace FirstApp
             return db.Books.ToList();
         }
 
-        public void AddBook(Book book)
+        async public void AddBookAsync(Book book)
         {
-            db.Add(book);
-            db.SaveChanges();
+            await db.AddAsync(book);
+            await db.SaveChangesAsync();
         }
 
-        public void DeleteBook(Book book)
+        async public void DeleteBookAsync(Book book)
         {
             db.Remove(book);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void ChangeYear(int id, int year)
+        async public void ChangeYearAsync(int id, int year)
         {
             var book = db.Books.FirstOrDefault(book => book.Id == id);
             book.Year = year;
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         // 1. Получить список книг определенного жанра и вышедших между определенными годами.

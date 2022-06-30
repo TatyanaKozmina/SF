@@ -3,15 +3,15 @@
 using (var db = new FirstApp.AppContext())
 {
     #region Create Data
-    db.Users.AddRangeAsync(new User { Name = "Kate", Email = "kate@example.com", Role = "admin" },
+    await db.Users.AddRangeAsync(new User { Name = "Kate", Email = "kate@example.com", Role = "admin" },
                            new User { Name = "Mike", Email = "mike@example.com", Role = "user" },
                            new User { Name = "Alex", Email = "alex@example.com" },
                            new User { Name = "Olga", Email = "olga@example.com", Role = "user" },
                            new User { Name = "Max", Email = "max@example.com" },
                            new User { Name = "Lena", Email = "lena@example.com", Role = "user" });
-    db.SaveChanges();
+    await db.SaveChangesAsync();
 
-    db.Books.AddRangeAsync(new Book { Author = "King", Title = "Misery", Genre = "horror", Year = 1987 },
+    await db.Books.AddRangeAsync(new Book { Author = "King", Title = "Misery", Genre = "horror", Year = 1987 },
                            new Book { Author = "King", Title = "Firestarter", Year = 1980 },
                            new Book { Author = "King", Title = "It", Genre = "horror", Year = 1986 },
                            new Book { Author = "Chandler", Title = "The big sleep", Genre = "crime", Year = 1939 },
@@ -20,7 +20,7 @@ using (var db = new FirstApp.AppContext())
                            new Book { Author = "Shekley", Title = "Dimension of Miracles", Genre = "scifi", Year = 1968 },
                            new Book { Author = "Иванов", Title = "Золото бунта", Genre = "приключения", Year = 2006 },
                            new Book { Author = "Иванов", Title = "Сердце пармы", Year = 2000 });
-    db.SaveChanges();
+    await db.SaveChangesAsync();
 
     BookRepository br = new BookRepository(db);
     UserRepository ur = new UserRepository(db);
@@ -31,6 +31,7 @@ using (var db = new FirstApp.AppContext())
     br.GiveBook(ur.GetByName("Mike"), br.GetByAuthorTitle("Иванов", "Сердце пармы"));
     br.GiveBook(ur.GetByName("Alex"), br.GetByAuthorTitle("King", "It"));
     br.GiveBook(ur.GetByName("Olga"), br.GetByAuthorTitle("Shekley", "Mindswap"));
+    await db.SaveChangesAsync();
 
     #endregion Create Data
 

@@ -26,23 +26,23 @@ namespace FirstApp
             return db.Users.ToList();
         }
 
-        public void AddUser(User user)
+        async public void AddUserAsync(User user)
         {
-            db.Add(user);
-            db.SaveChanges();
+            await db.AddAsync(user);
+            await db.SaveChangesAsync();
         }
 
-        public void DeleteUser(User user)
+        async public void DeleteUserAsync(User user)
         {
             db.Remove(user);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void ChangeName(int id, string name)
+        async public void ChangeName(int id, string name)
         {
             var user = db.Users.FirstOrDefault(user => user.Id == id);
             user.Name = name;
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
     }
 }
