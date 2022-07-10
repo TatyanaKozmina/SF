@@ -97,6 +97,6 @@ input {
     outline: none;
 }
 
-    input:focus {
-        border: 2px solid dimgrey;
-    }
+input:focus {
+    border: 2px solid dimgrey;
+}
