@@ -14,6 +14,9 @@ namespace MVCStartApp.Models
         /// Ссылка на таблицу UserPosts
         public DbSet<UserPost> UserPosts { get; set; }
 
+        /// Ссылка на таблицу с историей запросов
+        public DbSet<History> HistoryRecords { get; set; }
+
         // Логика взаимодействия с таблицами в БД
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {

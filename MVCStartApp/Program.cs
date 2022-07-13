@@ -8,6 +8,7 @@ string connection = builder.Configuration.GetConnectionString("DefaultConnection
 builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(connection));
 // регистрация сервиса репозитория для взаимодействия с базой данных
 builder.Services.AddTransient<IBlogRepository, BlogRepository>();
+builder.Services.AddTransient<IHistoryRepository, HistoryRepository>();
 
 builder.Services.AddControllersWithViews();
 
@@ -28,7 +29,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Подключаем логирвоание с использованием ПО промежуточного слоя
+// Подключаем логирование с использованием ПО промежуточного слоя
 app.UseMiddleware<MVCStartApp.Middlewares.LoggingMiddleware>();
 
 app.MapControllerRoute(
