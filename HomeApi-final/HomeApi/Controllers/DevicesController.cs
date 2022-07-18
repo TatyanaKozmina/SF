@@ -43,9 +43,7 @@ namespace HomeApi.Controllers
             };
             
             return StatusCode(200, resp);
-        }
-        
-        // TODO: Задание: напишите запрос на удаление устройства
+        }        
         
         /// <summary>
         /// Добавление нового устройства
@@ -96,6 +94,27 @@ namespace HomeApi.Controllers
             );
 
             return StatusCode(200, $"Устройство обновлено! Имя - {device.Name}, Серийный номер - {device.SerialNumber},  Комната подключения - {device.Room.Name}");
+        }
+
+        /// <summary>
+        /// Удаление устройства
+        /// </summary>
+        [HttpDelete]
+        [Route("")]
+        public async Task<IActionResult> Delete(DeleteDeviceRequest request)
+        {
+            var room = await _rooms.GetRoomByName(request.Location);
+            if (room == null)
+                return StatusCode(400, $"Ошибка: Комната {request.Location} не подключена. Сначала подключите комнату!");
+
+            var device = await _devices.GetDeviceByName(request.Name);
+            if (device == null)
+                return StatusCode(400, $"Ошибка: Устройства {request.Name} в комнате {request.Location} не существует.");
+
+            //var deviceToDelete = _mapper.Map<DeleteDeviceRequest, Device>(request);
+            await _devices.DeleteDevice(device);
+
+            return StatusCode(200, $"Устройство {request.Name} удалено из комнаты {request.Location}.");
         }
     }
 }
