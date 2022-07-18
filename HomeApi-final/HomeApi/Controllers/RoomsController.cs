@@ -4,6 +4,7 @@ using HomeApi.Contracts.Models.Rooms;
 using HomeApi.Data.Models;
 using HomeApi.Data.Repos;
 using Microsoft.AspNetCore.Mvc;
+using HomeApi.Data.Queries;
 
 namespace HomeApi.Controllers
 {
@@ -41,6 +42,24 @@ namespace HomeApi.Controllers
             }
             
             return StatusCode(409, $"Ошибка: Комната {request.Name} уже существует.");
+        }
+
+        /// <summary>
+        /// Перенастраиваем существующую комнату, перезаписывая все или часть её свойств
+        /// </summary>
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> Update([FromBody] UpdateRoomRequest request)
+        {
+            var room = await _repository.GetRoomByName(request.Name);
+            if (room == null)
+                return StatusCode(400, $"Ошибка: Комната {request.Name} не подключена. Сначала подключите комнату!");
+
+            await _repository.UpdateRoom(room,
+                                         new UpdateRoomQuery(request.Area, request.GasConnected, request.Voltage)
+            );
+
+            return StatusCode(200, $"Свойства комнаты {request.Name} перезаписаны.");
         }
     }
 }

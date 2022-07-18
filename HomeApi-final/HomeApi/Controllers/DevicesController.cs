@@ -111,7 +111,6 @@ namespace HomeApi.Controllers
             if (device == null)
                 return StatusCode(400, $"Ошибка: Устройства {request.Name} в комнате {request.Location} не существует.");
 
-            //var deviceToDelete = _mapper.Map<DeleteDeviceRequest, Device>(request);
             await _devices.DeleteDevice(device);
 
             return StatusCode(200, $"Устройство {request.Name} удалено из комнаты {request.Location}.");
