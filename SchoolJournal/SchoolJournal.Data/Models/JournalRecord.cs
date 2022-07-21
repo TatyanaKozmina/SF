@@ -4,6 +4,8 @@ namespace SchoolJournal.Models.DB
 {
     public class JournalRecord
     {   
+        public Guid Id { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime Created { get; set; } = DateTime.Today;
         public Subject Subject { get; set; }

@@ -2,7 +2,7 @@
 {
     public interface IStreamRepository
     {
-        Task<Models.DB.Stream[]> GetStreams();
+        Task<List<Models.DB.Stream>> GetStreams();
 
         Task AddStream(Models.DB.Stream stream);
     }

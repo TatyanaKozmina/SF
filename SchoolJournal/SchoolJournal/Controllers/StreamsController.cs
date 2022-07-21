@@ -6,28 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolJournal.Data;
-using SchoolJournal.Models;
+using SchoolJournal.Data.Repos;
 
 namespace SchoolJournal.Controllers
 {
-    public class StreamController : Controller
+    public class StreamsController : Controller
     {
-        private readonly SchoolJournalContext _context;
+        //private readonly SchoolJournalContext _context;
+        private IStreamRepository _streamRepository;
 
-        public StreamController(SchoolJournalContext context)
+        public StreamsController(IStreamRepository streamRepository)
         {
-            _context = context;
+            _streamRepository = streamRepository;
         }
 
-        // GET: Stream
+        // GET: Streams
         public async Task<IActionResult> Index()
         {
-              return _context.Stream != null ? 
-                          View(await _context.Stream.ToListAsync()) :
-                          Problem("Entity set 'SchoolJournalContext.Stream'  is null.");
+            return View(await _streamRepository.GetStreams());              
         }
 
-        // GET: Stream/Details/5
+
+        /*
+        // GET: Streams/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Stream == null)
@@ -45,18 +46,18 @@ namespace SchoolJournal.Controllers
             return View(stream);
         }
 
-        // GET: Stream/Create
+        // GET: Streams/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Stream/Create
+        // POST: Streams/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Started,CurrentClass,IsCompleted")] Models.Stream stream)
+        public async Task<IActionResult> Create([Bind("Id,Started,CurrentClass,IsCompleted")] Stream stream)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +69,7 @@ namespace SchoolJournal.Controllers
             return View(stream);
         }
 
-        // GET: Stream/Edit/5
+        // GET: Streams/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Stream == null)
@@ -84,12 +85,12 @@ namespace SchoolJournal.Controllers
             return View(stream);
         }
 
-        // POST: Stream/Edit/5
+        // POST: Streams/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Started,CurrentClass,IsCompleted")] Models.Stream stream)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Started,CurrentClass,IsCompleted")] Stream stream)
         {
             if (id != stream.Id)
             {
@@ -119,7 +120,7 @@ namespace SchoolJournal.Controllers
             return View(stream);
         }
 
-        // GET: Stream/Delete/5
+        // GET: Streams/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Stream == null)
@@ -137,7 +138,7 @@ namespace SchoolJournal.Controllers
             return View(stream);
         }
 
-        // POST: Stream/Delete/5
+        // POST: Streams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -160,5 +161,7 @@ namespace SchoolJournal.Controllers
         {
           return (_context.Stream?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        */
     }
 }

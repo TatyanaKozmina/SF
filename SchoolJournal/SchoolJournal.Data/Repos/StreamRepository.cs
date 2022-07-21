@@ -2,7 +2,7 @@
 
 namespace SchoolJournal.Data.Repos
 {
-    internal class StreamRepository : IStreamRepository
+    public class StreamRepository : IStreamRepository
     {
         private readonly SchoolJournalDBContext _context;
 
@@ -19,9 +19,9 @@ namespace SchoolJournal.Data.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Models.DB.Stream[]> GetStreams()
+        public async Task<List<Models.DB.Stream>> GetStreams()
         {
-            return await _context.Streams.ToArrayAsync();
+            return await _context.Streams.ToListAsync();
         }
     }
 }

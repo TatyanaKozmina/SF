@@ -56,3 +56,5 @@
 /TK_SocialNetwork/.vs
 /SchoolJournal/.vs
 *.txt
+/SchoolJournal/SchoolJournal/bin/Debug/net6.0
+/SchoolJournal/SchoolJournal/obj
