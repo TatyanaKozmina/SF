@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using SchoolJournal.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolJournal.Data.Repos;
 
 namespace SchoolJournal.Controllers
 {
     public class StreamsController : Controller
     {
-        //private readonly SchoolJournalContext _context;
         private IStreamRepository _streamRepository;
 
         public StreamsController(IStreamRepository streamRepository)
