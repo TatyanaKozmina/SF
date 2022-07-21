@@ -10,18 +10,20 @@ namespace SchoolJournal.Data.Repos
         {
             _context = context;
         }
-        public async Task AddStream(Models.DB.Stream stream)
+        public async Task Create(Models.DB.Stream stream)
         {
             var entry = _context.Entry(stream);
             if (entry.State == EntityState.Detached)
+            {
+                stream.Id = Guid.NewGuid();
                 await _context.Streams.AddAsync(stream);
-
+            }
             await _context.SaveChangesAsync();
         }
 
         public async Task<List<Models.DB.Stream>> GetStreams()
         {
-            return await _context.Streams.ToListAsync();
+            return await _context.Streams.OrderByDescending(s => s.Started).ToListAsync();
         }
     }
 }

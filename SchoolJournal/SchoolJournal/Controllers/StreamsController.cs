@@ -18,6 +18,26 @@ namespace SchoolJournal.Controllers
             return View(await _streamRepository.GetStreams());              
         }
 
+        // GET: Streams/Create Метод для отображения формы создания нового потока
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Streams/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Started,CurrentClass,IsCompleted")] Models.DB.Stream stream)        
+        {
+            if (ModelState.IsValid)
+            {
+                await _streamRepository.Create(stream);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(stream);
+        }
 
         /*
         // GET: Streams/Details/5
@@ -36,30 +56,7 @@ namespace SchoolJournal.Controllers
             }
 
             return View(stream);
-        }
-
-        // GET: Streams/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Streams/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Started,CurrentClass,IsCompleted")] Stream stream)
-        {
-            if (ModelState.IsValid)
-            {
-                stream.Id = Guid.NewGuid();
-                _context.Add(stream);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(stream);
-        }
+        }  
 
         // GET: Streams/Edit/5
         public async Task<IActionResult> Edit(Guid? id)

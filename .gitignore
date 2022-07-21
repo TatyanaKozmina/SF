@@ -58,3 +58,5 @@
 *.txt
 /SchoolJournal/SchoolJournal/bin/Debug/net6.0
 /SchoolJournal/SchoolJournal/obj
+/SchoolJournal/SchoolJournal.Data/bin/Debug/net6.0
+/SchoolJournal/SchoolJournal.Data/obj

@@ -4,6 +4,6 @@
     {
         Task<List<Models.DB.Stream>> GetStreams();
 
-        Task AddStream(Models.DB.Stream stream);
+        Task Create(Models.DB.Stream stream);
     }
 }
