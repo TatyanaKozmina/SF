@@ -10,6 +10,7 @@ namespace SchoolJournal.Data
         public DbSet<Pupil> Pupils { get; set; }
         public DbSet<JournalRecord> JournalRecords { get; set; }
 
+        public DbSet<User> Users { get; set; }
         public SchoolJournalDBContext(DbContextOptions<SchoolJournalDBContext> options) : base(options)
         {
             Database.EnsureCreated();
