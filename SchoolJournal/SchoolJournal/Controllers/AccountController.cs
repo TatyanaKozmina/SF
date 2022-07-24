@@ -41,6 +41,28 @@ namespace SchoolJournal.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userRepository.GetUser(model.Email, model.Password);
+                if (user != null)
+                {
+                    //await Authenticate(model.Email); // аутентификация, раскомментируем позже
+
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+            }
+            return View(model);
+        }
 
 
     }
