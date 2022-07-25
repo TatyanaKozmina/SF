@@ -4,5 +4,12 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (User.Identity.IsAuthenticated == false)
+    {
+        <p>Для доступа к дополнительной информации зайдите в свой аккаунт или зарегестрируйтесь.</p>
+    }
+    else
+    {
+        @await Html.PartialAsync("_Thanks")
+    }
 </div>

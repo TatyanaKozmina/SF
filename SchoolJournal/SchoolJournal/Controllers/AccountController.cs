@@ -38,7 +38,7 @@ namespace SchoolJournal.Controllers
                     // добавляем пользователя в бд
                     await _userRepository.AddUser(user);                    
 
-                    await Authenticate(model.Email); // аутентификация
+                    await Authenticate(model.Name); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -62,7 +62,7 @@ namespace SchoolJournal.Controllers
                 var user = await _userRepository.GetUser(model.Email, model.Password);
                 if (user != null)
                 {
-                    await Authenticate(model.Email); // аутентификация
+                    await Authenticate(user.Name); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }

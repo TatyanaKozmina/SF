@@ -18,10 +18,7 @@ namespace SchoolJournal.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            if(User.Identity.IsAuthenticated)
-                return Content(User.Identity.Name);
-            else
-                return View();
+            return View();
         }        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
