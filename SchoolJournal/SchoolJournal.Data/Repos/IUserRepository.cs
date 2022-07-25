@@ -6,6 +6,6 @@ namespace SchoolJournal.Data.Repos
     {
         Task<User> GetUser(string email, string password);
         Task<User> GetUserByEmail(string email);
-        Task AddUser(string email, string password);
+        Task AddUser(User user);
     }
 }

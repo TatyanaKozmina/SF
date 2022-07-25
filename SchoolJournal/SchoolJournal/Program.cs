@@ -10,6 +10,8 @@ builder.Services.AddDbContext<SchoolJournalDBContext>(options => options.UseSqlS
 builder.Services.AddSingleton<IStreamRepository, StreamRepository>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
+builder.Services.AddAutoMapper(typeof(SchoolJournal.MappingProfile));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

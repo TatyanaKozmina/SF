@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using SchoolJournal.Data.Repos;
 using SchoolJournal.Models;
 using System.Security.Claims;
+using SchoolJournal.Models.DB;
 
 namespace SchoolJournal.Controllers
 {
     public class AccountController : Controller
     {
         private IUserRepository _userRepository;
-
-        public AccountController(IUserRepository userRepository)
+        private IMapper _mapper;
+        public AccountController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -31,8 +34,9 @@ namespace SchoolJournal.Controllers
                 var user = await _userRepository.GetUserByEmail(model.Email);
                 if (user == null)
                 {
+                    user = _mapper.Map<User>(model);
                     // добавляем пользователя в бд
-                    await _userRepository.AddUser(model.Email, model.Password);                    
+                    await _userRepository.AddUser(user);                    
 
                     await Authenticate(model.Email); // аутентификация
 

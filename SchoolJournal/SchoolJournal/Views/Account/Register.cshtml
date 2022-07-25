@@ -6,6 +6,11 @@
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div>
         <div>
+            <label asp-for="Name">Введите Имя</label><br />
+            <input type="text" asp-for="Name" />
+            <span asp-validation-for="Name" />
+        </div>
+        <div>
             <label asp-for="Email">Введите Email</label><br />
             <input type="text" asp-for="Email" />
             <span asp-validation-for="Email" />

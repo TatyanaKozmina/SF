@@ -12,12 +12,8 @@ namespace SchoolJournal.Data.Repos
             _context = context;
         }
 
-        public async Task AddUser(string email, string password)
+        public async Task AddUser(User user)
         {
-            User user = new User();
-            user.Id = Guid.NewGuid();
-            user.Email = email;
-            user.Password = password;
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }
