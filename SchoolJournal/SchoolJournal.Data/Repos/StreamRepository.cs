@@ -21,9 +21,28 @@ namespace SchoolJournal.Data.Repos
             await _context.SaveChangesAsync();
         }
 
+        public async Task Delete(Guid id)
+        {
+            var stream = _context.Streams.Find(id);
+            _context.Streams.Remove(stream);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Models.DB.Stream> GetStreamById(Guid? id)
+        {
+            return await _context.Streams.Where(s => s.Id == id).FirstOrDefaultAsync();
+        }
+
         public async Task<List<Models.DB.Stream>> GetStreams()
         {
             return await _context.Streams.OrderByDescending(s => s.Started).ToListAsync();
+        }
+
+        public async Task Update(Models.DB.Stream stream)
+        {
+            var updateStream = _context.Streams.Find(stream.Id);
+            _context.Entry(updateStream).CurrentValues.SetValues(stream);
+            await _context.SaveChangesAsync();            
         }
     }
 }
