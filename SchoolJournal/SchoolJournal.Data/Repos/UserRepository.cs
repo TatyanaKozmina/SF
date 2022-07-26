@@ -20,7 +20,9 @@ namespace SchoolJournal.Data.Repos
 
         public async Task<User> GetUser(string email, string password)
         {
-            return await _context.Users.Where(u => u.Email == email && u.Password == password).FirstOrDefaultAsync();
+            return await _context.Users
+                .Where(u => u.Email == email && u.Password == password)
+                .Include(u => u.Role).FirstOrDefaultAsync();
         }
 
         public async Task<User> GetUserByEmail(string email)

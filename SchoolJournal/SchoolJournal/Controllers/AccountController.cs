@@ -38,7 +38,7 @@ namespace SchoolJournal.Controllers
                     // добавляем пользователя в бд
                     await _userRepository.AddUser(user);                    
 
-                    await Authenticate(model.Name); // аутентификация
+                    await Authenticate(model.Name, "user"); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -62,7 +62,7 @@ namespace SchoolJournal.Controllers
                 var user = await _userRepository.GetUser(model.Email, model.Password);
                 if (user != null)
                 {
-                    await Authenticate(user.Name); // аутентификация
+                    await Authenticate(user.Name, user.Role.Name); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -71,12 +71,13 @@ namespace SchoolJournal.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(string userName, string role)
         {
             // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
