@@ -40,6 +40,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Подключаем логирование с использованием ПО промежуточного слоя
+app.UseMiddleware<CustomLog.CustomLog>();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CustomLog\CustomLog.csproj" />
     <ProjectReference Include="..\SchoolJournal.Data\SchoolJournal.Data.csproj" />
   </ItemGroup>
 
