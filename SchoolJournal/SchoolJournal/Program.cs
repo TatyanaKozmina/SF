@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using CustomLog;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SchoolJournal.Data;
 using SchoolJournal.Data.Repos;
@@ -11,6 +12,9 @@ builder.Services.AddSingleton<IStreamRepository, StreamRepository>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
 builder.Services.AddAutoMapper(typeof(SchoolJournal.MappingProfile));
+
+builder.Configuration.AddJsonFile("CustomLogOptions.json");
+builder.Services.Configure<CustomLogOptions>(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
