@@ -10,6 +10,7 @@ string connection = builder.Configuration.GetConnectionString("SchoolJournalDBCo
 builder.Services.AddDbContext<SchoolJournalDBContext>(options => options.UseSqlServer(connection), ServiceLifetime.Singleton);
 builder.Services.AddSingleton<IStreamRepository, StreamRepository>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<IPupilRepository, PupilRepository>();
 
 builder.Services.AddAutoMapper(typeof(SchoolJournal.MappingProfile));
 

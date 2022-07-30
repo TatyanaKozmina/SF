@@ -10,6 +10,6 @@ namespace SchoolJournal.Models.DB
         public DateTime Started { get; set; }
         public int CurrentClass { get; set; }
         public bool IsCompleted { get; set; }
-
+        List<Pupil> Pupils { get; set; } = new List<Pupil>();
     }
 }

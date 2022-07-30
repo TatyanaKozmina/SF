@@ -4,6 +4,8 @@ namespace SchoolJournal.Data.Repos
 {
     public interface IPupilRepository
     {
-        Task<Pupil[]> GetPupils();
+        Task<List<Pupil>> GetPupils(Guid streamId);
+
+        Task Create(Pupil pupil, Guid streamId);
     }
 }

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolJournal.Data", "Schoo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolJournal", "SchoolJournal\SchoolJournal.csproj", "{8A5AFA50-2DB1-42C4-918E-8E224322FFA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomLog", "CustomLog\CustomLog.csproj", "{05526590-7890-43C7-88DB-9E344F27EB8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomLog", "CustomLog\CustomLog.csproj", "{05526590-7890-43C7-88DB-9E344F27EB8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolJournal.Test", "SchoolJournal.Test\SchoolJournal.Test.csproj", "{AEAA336D-5FCB-413C-942F-8400231EA0E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{05526590-7890-43C7-88DB-9E344F27EB8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05526590-7890-43C7-88DB-9E344F27EB8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05526590-7890-43C7-88DB-9E344F27EB8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEAA336D-5FCB-413C-942F-8400231EA0E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAA336D-5FCB-413C-942F-8400231EA0E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAA336D-5FCB-413C-942F-8400231EA0E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAA336D-5FCB-413C-942F-8400231EA0E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

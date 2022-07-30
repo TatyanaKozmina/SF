@@ -1,7 +1,6 @@
 ﻿using SchoolJournal.Models.DB;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace SchoolJournal.Data.Repos
 {
     public class UserRepository : IUserRepository
@@ -14,6 +13,7 @@ namespace SchoolJournal.Data.Repos
 
         public async Task AddUser(User user)
         {
+            user.Role = _context.Roles.Where(r => r.Name == "user").FirstOrDefault();
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }
