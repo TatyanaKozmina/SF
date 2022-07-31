@@ -87,23 +87,10 @@ namespace SchoolJournal.Controllers
             return RedirectToAction(nameof(Index));
         }
         
-        // GET: Streams/Details/5
+        // GET: Streams/Details/5 Показываем список учеников в потоке
         public async Task<IActionResult> Details(Guid? id)
         {
-            return RedirectToAction("Index", "Pupils", new { streamId = id});
-            //if (id == null || _context.Stream == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var stream = await _context.Stream
-            //    .FirstOrDefaultAsync(m => m.Id == id);
-            //if (stream == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return View(stream);
+            return RedirectToAction("Index", "Pupils", new { streamId = id});            
         }
     }
 }
