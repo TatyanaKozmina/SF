@@ -9,7 +9,7 @@
 @if (User.IsInRole("admin"))
 {
     <p>
-        <a asp-action="Create">Добавить ученика</a>
+        <a asp-action="Create" asp-route-id="@ViewData["StreamId"]">Добавить ученика</a>
     </p>
 }
 
@@ -47,3 +47,7 @@
         }
     </tbody>
 </table>
+
+<div>
+    <a asp-controller="Streams" asp-action="Index">Вернуться к списку потоков</a>
+</div>

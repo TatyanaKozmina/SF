@@ -1,25 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolJournal.Data.Repos;
+using SchoolJournal.Models.DB;
 
 namespace SchoolJournal.Controllers
 {
     public class PupilsController : Controller
     {
         private IPupilRepository _pupilRepository;
+        private IStreamRepository _streamRepository;
 
-        public PupilsController(IPupilRepository pupilRepository)
+        public PupilsController(IPupilRepository pupilRepository, IStreamRepository streamRepository)
         {
             _pupilRepository = pupilRepository;
+            _streamRepository = streamRepository;
         }
 
-        // GET: Pupils
+        // GET: Pupils        
+        //public async Task<IActionResult> Index(Guid streamId)
         public async Task<IActionResult> Index(Guid streamId)
         {
+            ViewData["StreamId"] = streamId;
             return View(await _pupilRepository.GetPupils(streamId));
-              //return _context.Pupil != null ? 
-              //            View(await _context.Pupil.ToListAsync()) :
-              //            Problem("Entity set 'SchoolJournalContext.Pupil'  is null.");
+        }
+
+        // GET: Pupils/Create
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Create(Guid? id)
+        {
+            ViewBag.Streams = new SelectList(await _streamRepository.GetStreams(), "Id", "Started", id);
+            return View();
+        }
+
+        // POST: Pupils/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,StreamId")] Pupil pupil)
+        {
+            await _pupilRepository.Create(pupil);
+            return RedirectToAction("Index", "Pupils", new {streamId = pupil.StreamId});
         }
 
         // GET: Pupils/Details/5
@@ -40,28 +63,7 @@ namespace SchoolJournal.Controllers
         //    return View(pupil);
         //}
 
-        //// GET: Pupils/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
 
-        //// POST: Pupils/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,FirstName,LastName")] Pupil pupil)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        pupil.Id = Guid.NewGuid();
-        //        _context.Add(pupil);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(pupil);
-        //}
 
         //// GET: Pupils/Edit/5
         //public async Task<IActionResult> Edit(Guid? id)
@@ -146,7 +148,7 @@ namespace SchoolJournal.Controllers
         //    {
         //        _context.Pupil.Remove(pupil);
         //    }
-            
+
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}

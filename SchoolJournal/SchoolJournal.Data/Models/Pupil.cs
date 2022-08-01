@@ -9,6 +9,7 @@ namespace SchoolJournal.Models.DB
         public string FirstName { get; set; }
         [Display(Name = "Фамилия")]
         public string LastName { get; set; }
+        [Display(Name = "Поток")]
         public Guid StreamId { get; set; }
         public Stream Stream { get; set; }
 

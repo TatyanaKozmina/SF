@@ -90,7 +90,7 @@ namespace SchoolJournal.Controllers
         // GET: Streams/Details/5 Показываем список учеников в потоке
         public async Task<IActionResult> Details(Guid? id)
         {
-            return RedirectToAction("Index", "Pupils", new { streamId = id});            
+            return RedirectToAction("Index", "Pupils", new { streamId = id });            
         }
     }
 }
