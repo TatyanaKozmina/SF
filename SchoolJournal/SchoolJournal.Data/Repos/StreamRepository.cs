@@ -28,7 +28,7 @@ namespace SchoolJournal.Data.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Models.DB.Stream> GetStreamById(Guid? id)
+        public async Task<Models.DB.Stream> GetById(Guid? id)
         {
             return await _context.Streams.Where(s => s.Id == id).FirstOrDefaultAsync();
         }

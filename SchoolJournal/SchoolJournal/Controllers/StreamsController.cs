@@ -47,7 +47,7 @@ namespace SchoolJournal.Controllers
         {
             if (id == null) return NotFound();
 
-            var stream = await _streamRepository.GetStreamById(id);
+            var stream = await _streamRepository.GetById(id);
             if (stream == null) return NotFound();
             return View(stream);            
         }
@@ -73,7 +73,7 @@ namespace SchoolJournal.Controllers
         {
             if (id == null) return NotFound();
 
-            var stream = await _streamRepository.GetStreamById(id);
+            var stream = await _streamRepository.GetById(id);
             if (stream == null) return NotFound();
             return View(stream);
         }

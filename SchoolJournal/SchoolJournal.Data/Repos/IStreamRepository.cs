@@ -4,7 +4,7 @@
     {
         Task<List<Models.DB.Stream>> GetStreams();
         Task Create(Models.DB.Stream stream);
-        Task<Models.DB.Stream> GetStreamById(Guid? id);
+        Task<Models.DB.Stream> GetById(Guid? id);
         Task Update(Models.DB.Stream stream);
         Task Delete(Guid id);
     }

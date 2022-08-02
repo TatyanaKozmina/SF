@@ -11,7 +11,6 @@ namespace SchoolJournal.Controllers
     {
         private IPupilRepository _pupilRepository;
         private IStreamRepository _streamRepository;
-
         public PupilsController(IPupilRepository pupilRepository, IStreamRepository streamRepository)
         {
             _pupilRepository = pupilRepository;
@@ -19,7 +18,6 @@ namespace SchoolJournal.Controllers
         }
 
         // GET: Pupils        
-        //public async Task<IActionResult> Index(Guid streamId)
         public async Task<IActionResult> Index(Guid streamId)
         {
             ViewData["StreamId"] = streamId;
@@ -45,7 +43,36 @@ namespace SchoolJournal.Controllers
             return RedirectToAction("Index", "Pupils", new {streamId = pupil.StreamId});
         }
 
-        // GET: Pupils/Details/5
+        // GET: Pupils/Edit/5
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Edit(Guid? id)
+        {
+            if (id == null) return NotFound();
+            var pupil = await _pupilRepository.GetById(id);
+            if (pupil == null) return NotFound();
+            ViewBag.Streams = new SelectList(await _streamRepository.GetStreams(), "Id", "Started", pupil.StreamId);
+            return View(pupil);
+        }
+
+        // POST: Pupils/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName,StreamId")] Pupil pupil)
+        {
+            try
+            {
+                await _pupilRepository.Update(pupil);
+                return RedirectToAction("Index", "Pupils", new { streamId = pupil.StreamId });
+            }
+            catch
+            {
+                return View(pupil);
+            }
+        }
+
+        ////GET: Pupils/Details/5
         //public async Task<IActionResult> Details(Guid? id)
         //{
         //    if (id == null || _context.Pupil == null)
@@ -65,56 +92,7 @@ namespace SchoolJournal.Controllers
 
 
 
-        //// GET: Pupils/Edit/5
-        //public async Task<IActionResult> Edit(Guid? id)
-        //{
-        //    if (id == null || _context.Pupil == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    var pupil = await _context.Pupil.FindAsync(id);
-        //    if (pupil == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(pupil);
-        //}
-
-        //// POST: Pupils/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName")] Pupil pupil)
-        //{
-        //    if (id != pupil.Id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(pupil);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!PupilExists(pupil.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(pupil);
-        //}
 
         //// GET: Pupils/Delete/5
         //public async Task<IActionResult> Delete(Guid? id)
