@@ -36,7 +36,7 @@ namespace SchoolJournal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,StreamId")] Pupil pupil)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,StreamId")] Pupil pupil)
         {
             await _pupilRepository.Create(pupil);
             return RedirectToAction("Index", "Pupils", new { streamId = pupil.StreamId });
@@ -58,7 +58,7 @@ namespace SchoolJournal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName,StreamId")] Pupil pupil)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName,Email,StreamId")] Pupil pupil)
         {
             try
             {
