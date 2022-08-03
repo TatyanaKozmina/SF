@@ -42,7 +42,13 @@
                         <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
                         <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
                     </td>
-                }                
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Детали</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

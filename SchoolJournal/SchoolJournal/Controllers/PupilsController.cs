@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using SchoolJournal.Data.Repos;
 using SchoolJournal.Models.DB;
 
@@ -40,7 +39,7 @@ namespace SchoolJournal.Controllers
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,StreamId")] Pupil pupil)
         {
             await _pupilRepository.Create(pupil);
-            return RedirectToAction("Index", "Pupils", new {streamId = pupil.StreamId});
+            return RedirectToAction("Index", "Pupils", new { streamId = pupil.StreamId });
         }
 
         // GET: Pupils/Edit/5
@@ -77,7 +76,7 @@ namespace SchoolJournal.Controllers
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();
-            var pupil = await _pupilRepository.GetById(id);   
+            var pupil = await _pupilRepository.GetById(id);
             if (pupil == null) return NotFound();
             return View(pupil);
         }
@@ -91,33 +90,13 @@ namespace SchoolJournal.Controllers
             return RedirectToAction("Index", "Pupils", new { streamId = StreamId });
         }
 
-        ////GET: Pupils/Details/5
-        //public async Task<IActionResult> Details(Guid? id)
-        //{
-        //    if (id == null || _context.Pupil == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var pupil = await _context.Pupil
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (pupil == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(pupil);
-        //}
-
-
-
-
-
-
-
-        //private bool PupilExists(Guid id)
-        //{
-        //  return (_context.Pupil?.Any(e => e.Id == id)).GetValueOrDefault();
-        //}
+        //GET: Pupils/Details/5
+        public async Task<IActionResult> Details(Guid? id)
+        {
+            if (id == null) return NotFound();
+            var pupil = await _pupilRepository.GetById(id);
+            if (pupil == null) return NotFound();
+            return View(pupil);
+        }
     }
 }
