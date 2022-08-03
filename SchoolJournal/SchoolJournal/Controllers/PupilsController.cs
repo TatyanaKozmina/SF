@@ -91,6 +91,7 @@ namespace SchoolJournal.Controllers
         }
 
         //GET: Pupils/Details/5
+        [Authorize(Roles = "admin,user")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null) return NotFound();

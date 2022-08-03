@@ -22,12 +22,16 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+        @if (User.HasClaim(c => c.Type == System.Security.Claims.ClaimTypes.Email && c.Value == @Model.Email)
+            || User.IsInRole("admin"))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        }
     </dl>
 </div>
 <div>
