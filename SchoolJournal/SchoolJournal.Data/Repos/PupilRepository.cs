@@ -20,6 +20,14 @@ namespace SchoolJournal.Data.Repos
             await _context.SaveChangesAsync();
         }
 
+        public async Task Delete(Guid? id)
+        {
+            var pupil = _context.Pupils.Find(id);
+            if (pupil == null) return;
+            _context.Pupils.Remove(pupil);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Pupil> GetById(Guid? id)
         {
             return await _context.Pupils
@@ -37,6 +45,7 @@ namespace SchoolJournal.Data.Repos
         public async Task Update(Pupil pupil)
         {
             var updatePupil = _context.Pupils.Find(pupil.Id);
+            if (updatePupil == null) return;
             _context.Entry(updatePupil).CurrentValues.SetValues(pupil);
             await _context.SaveChangesAsync();
         }

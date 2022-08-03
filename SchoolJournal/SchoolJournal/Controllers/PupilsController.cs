@@ -72,6 +72,25 @@ namespace SchoolJournal.Controllers
             }
         }
 
+        // GET: Pupils/Delete/5
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Delete(Guid? id)
+        {
+            if (id == null) return NotFound();
+            var pupil = await _pupilRepository.GetById(id);   
+            if (pupil == null) return NotFound();
+            return View(pupil);
+        }
+
+        // POST: Pupils/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Guid id, Guid StreamId)
+        {
+            await _pupilRepository.Delete(id);
+            return RedirectToAction("Index", "Pupils", new { streamId = StreamId });
+        }
+
         ////GET: Pupils/Details/5
         //public async Task<IActionResult> Details(Guid? id)
         //{
@@ -94,42 +113,7 @@ namespace SchoolJournal.Controllers
 
 
 
-        //// GET: Pupils/Delete/5
-        //public async Task<IActionResult> Delete(Guid? id)
-        //{
-        //    if (id == null || _context.Pupil == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    var pupil = await _context.Pupil
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (pupil == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(pupil);
-        //}
-
-        //// POST: Pupils/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(Guid id)
-        //{
-        //    if (_context.Pupil == null)
-        //    {
-        //        return Problem("Entity set 'SchoolJournalContext.Pupil'  is null.");
-        //    }
-        //    var pupil = await _context.Pupil.FindAsync(id);
-        //    if (pupil != null)
-        //    {
-        //        _context.Pupil.Remove(pupil);
-        //    }
-
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
 
         //private bool PupilExists(Guid id)
         //{

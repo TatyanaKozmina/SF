@@ -8,5 +8,6 @@ namespace SchoolJournal.Data.Repos
         Task Create(Pupil pupil);
         Task<Pupil> GetById(Guid? id);
         Task Update(Pupil pupil);
+        Task Delete(Guid? id);
     }
 }

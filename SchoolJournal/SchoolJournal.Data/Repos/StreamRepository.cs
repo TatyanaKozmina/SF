@@ -24,6 +24,7 @@ namespace SchoolJournal.Data.Repos
         public async Task Delete(Guid id)
         {
             var stream = _context.Streams.Find(id);
+            if (stream == null) return;
             _context.Streams.Remove(stream);
             await _context.SaveChangesAsync();
         }
@@ -41,6 +42,7 @@ namespace SchoolJournal.Data.Repos
         public async Task Update(Models.DB.Stream stream)
         {
             var updateStream = _context.Streams.Find(stream.Id);
+            if (updateStream == null) return;
             _context.Entry(updateStream).CurrentValues.SetValues(stream);
             await _context.SaveChangesAsync();            
         }
