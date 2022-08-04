@@ -1,0 +1,38 @@
+﻿@if (User.IsInRole("admin"))
+{
+    <p>
+        <a asp-action="Create">Добавить оценку</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Дата
+            </th>
+            <th>
+                Предмет
+            </th>
+            <th>
+                Оценка
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < 5; i++)
+        {
+            <tr>
+                <td>
+                    @DateTime.Today
+                </td>
+                <td>
+                    Математика
+                </td>
+                <td>
+                    4
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>      

@@ -23,5 +23,7 @@ namespace SchoolJournal.Models.DB
 
         public Stream Stream { get; set; }
 
+        public List<JournalRecord> JournalRecords { get; set; } = new List<JournalRecord>();
+
     }
 }
