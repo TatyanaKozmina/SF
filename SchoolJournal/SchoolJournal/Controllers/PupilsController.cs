@@ -99,5 +99,12 @@ namespace SchoolJournal.Controllers
             if (pupil == null) return NotFound();
             return View(pupil);
         }
+
+        // GET: Pupils/Create
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> AddMark(Guid? pupilId)
+        {
+            return RedirectToAction("Create", "JournalRecords", new { id = pupilId });
+        }
     }
 }

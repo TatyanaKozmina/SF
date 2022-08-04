@@ -12,9 +12,13 @@ namespace SchoolJournal.Data.Repos
             _context = context;
         }
 
-        public async Task<JournalRecord[]> GetJournalRecords()
+        public async Task Create(Guid pupilId, JournalRecord journalRecord)
         {
-            return await _context.JournalRecords.Include(p => p.Pupil).ToArrayAsync();
-        }
+            journalRecord.PupilId = pupilId;
+            journalRecord.Pupil = await _context.Pupils.Where(p => p.Id == pupilId).FirstOrDefaultAsync();
+            journalRecord.Id = Guid.NewGuid();
+            await _context.JournalRecords.AddAsync(journalRecord);
+            await _context.SaveChangesAsync();
+        }        
     }
 }

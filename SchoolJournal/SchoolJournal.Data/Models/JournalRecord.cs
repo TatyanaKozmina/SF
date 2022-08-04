@@ -8,6 +8,7 @@ namespace SchoolJournal.Models.DB
 
         [DataType(DataType.Date)]
         [Display(Name = "Дата")]
+        [Required]
         public DateTime Created { get; set; } = DateTime.Today;
 
         [Required]

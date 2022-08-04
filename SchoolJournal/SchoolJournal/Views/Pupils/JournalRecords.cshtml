@@ -1,7 +1,7 @@
 ﻿@if (User.IsInRole("admin"))
 {
     <p>
-        <a asp-action="Create">Добавить оценку</a>
+        <a asp-action="AddMark" asp-route-pupilId="@Model?.Id">Добавить оценку</a>
     </p>
 }
 <table class="table">

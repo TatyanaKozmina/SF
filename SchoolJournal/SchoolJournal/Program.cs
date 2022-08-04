@@ -11,6 +11,7 @@ builder.Services.AddDbContext<SchoolJournalDBContext>(options => options.UseSqlS
 builder.Services.AddSingleton<IStreamRepository, StreamRepository>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<IPupilRepository, PupilRepository>();
+builder.Services.AddSingleton<IJournalRecordRepository, JournalRecordRepository>();
 
 builder.Services.AddAutoMapper(typeof(SchoolJournal.MappingProfile));
 

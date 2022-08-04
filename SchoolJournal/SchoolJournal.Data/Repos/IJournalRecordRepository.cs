@@ -4,6 +4,6 @@ namespace SchoolJournal.Data.Repos
 {
     public interface IJournalRecordRepository
     {
-        Task<JournalRecord[]> GetJournalRecords();
+        Task Create(Guid pupilId, JournalRecord jornalRecord);
     }
 }
