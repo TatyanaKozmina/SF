@@ -28,14 +28,14 @@ namespace SchoolJournal.Data.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Pupil> GetById(Guid? id)
+        public async Task<Pupil?> GetById(Guid? id)
         {
             return await _context.Pupils
                 .Where(p => p.Id == id)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Pupil>> GetPupils(Guid streamId)
+        public async Task<List<Pupil>> GetAll(Guid streamId)
         {
             return await _context.Pupils
                 .Where(p => p.StreamId == streamId)

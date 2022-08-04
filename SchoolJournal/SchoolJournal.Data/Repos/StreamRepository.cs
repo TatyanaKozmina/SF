@@ -34,7 +34,7 @@ namespace SchoolJournal.Data.Repos
             return await _context.Streams.Where(s => s.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Models.DB.Stream>> GetStreams()
+        public async Task<List<Models.DB.Stream>> GetAll()
         {
             return await _context.Streams.OrderByDescending(s => s.Started).ToListAsync();
         }

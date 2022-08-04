@@ -4,17 +4,26 @@ namespace SchoolJournal.Models.DB
 {
     public class JournalRecord
     {   
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [DataType(DataType.Date)]
+        [Display(Name = "Дата")]
         public DateTime Created { get; set; } = DateTime.Today;
+
+        [Required]
+        [Display(Name = "Предмет")]
         public Subject Subject { get; set; }
 
+        [Required]
         [Range(2, 5,
-        ErrorMessage = "Value for {0} must be between {1} and {2}.")]
+        ErrorMessage = "Оценки могут быть в диапазоне {1} и {2}.")]
+        [Display(Name = "Оценка")]
         public int Mark { get; set; }
+
+        [Display(Name = "Комментарий")]
         public string? Comment { get; set; }
 
+        [Required]
         public Guid PupilId { get; set; }
         public Pupil Pupil { get; set; }
     }

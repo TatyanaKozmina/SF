@@ -16,7 +16,7 @@ namespace SchoolJournal.Controllers
         // GET: Streams
         public async Task<IActionResult> Index()
         {
-            return View(await _streamRepository.GetStreams());              
+            return View(await _streamRepository.GetAll());              
         }
 
         // GET: Streams/Create Метод для отображения формы создания нового потока

@@ -4,8 +4,8 @@ namespace SchoolJournal.Data.Repos
 {
     public interface IUserRepository
     {
-        Task<User> GetUser(string email, string password);
-        Task<User> GetUserByEmail(string email);
-        Task AddUser(User user);
+        Task<User> GetByEmailPassword(string email, string password);
+        Task<User> GetByEmail(string email);
+        Task Create(User user);
     }
 }

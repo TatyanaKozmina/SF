@@ -20,14 +20,14 @@ namespace SchoolJournal.Controllers
         public async Task<IActionResult> Index(Guid streamId)
         {
             ViewData["StreamId"] = streamId;
-            return View(await _pupilRepository.GetPupils(streamId));
+            return View(await _pupilRepository.GetAll(streamId));
         }
 
         // GET: Pupils/Create
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(Guid? id)
         {
-            ViewBag.Streams = new SelectList(await _streamRepository.GetStreams(), "Id", "Started", id);
+            ViewBag.Streams = new SelectList(await _streamRepository.GetAll(), "Id", "Started", id);
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace SchoolJournal.Controllers
             if (id == null) return NotFound();
             var pupil = await _pupilRepository.GetById(id);
             if (pupil == null) return NotFound();
-            ViewBag.Streams = new SelectList(await _streamRepository.GetStreams(), "Id", "Started", pupil.StreamId);
+            ViewBag.Streams = new SelectList(await _streamRepository.GetAll(), "Id", "Started", pupil.StreamId);
             return View(pupil);
         }
 

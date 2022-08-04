@@ -31,12 +31,12 @@ namespace SchoolJournal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userRepository.GetUserByEmail(model.Email);
+                var user = await _userRepository.GetByEmail(model.Email);
                 if (user == null)
                 {
                     user = _mapper.Map<User>(model);
                     // добавляем пользователя в бд
-                    await _userRepository.AddUser(user);                    
+                    await _userRepository.Create(user);                    
 
                     await Authenticate(model.Name, "user", model.Email); // аутентификация
 
@@ -59,7 +59,7 @@ namespace SchoolJournal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userRepository.GetUser(model.Email, model.Password);
+                var user = await _userRepository.GetByEmailPassword(model.Email, model.Password);
                 if (user != null)
                 {
                     await Authenticate(user.Name, user.Role.Name, model.Email); // аутентификация
