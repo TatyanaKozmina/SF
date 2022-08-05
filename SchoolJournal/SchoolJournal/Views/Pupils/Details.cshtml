@@ -32,7 +32,7 @@
     @if (User.HasClaim(c => c.Type == System.Security.Claims.ClaimTypes.Email && c.Value == @Model.Email)
     || User.IsInRole("admin"))
     {
-        @await Html.PartialAsync("JournalRecords")
+        @await Html.PartialAsync("_JournalRecords", @Model.JournalRecords)
     }
 </div>
 <div>

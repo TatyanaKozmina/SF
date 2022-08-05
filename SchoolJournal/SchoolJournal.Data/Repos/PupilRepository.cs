@@ -32,6 +32,7 @@ namespace SchoolJournal.Data.Repos
         {
             return await _context.Pupils
                 .Where(p => p.Id == id)
+                .Include(p => p.JournalRecords.OrderByDescending(j => j.Created))
                 .FirstOrDefaultAsync();
         }
 
