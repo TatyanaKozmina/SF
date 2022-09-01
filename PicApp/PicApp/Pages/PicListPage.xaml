@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PicApp.Pages.PicListPage">
+  <ListView x:Name="PicListView"
+            ItemsSource="{Binding Items}"
+            ItemTapped="Handle_ItemTapped"
+            CachingStrategy="RecycleElement">
+    <!--Built in Cells-->
+    <ListView.ItemTemplate>
+        <DataTemplate>
+                <ImageCell ImageSource="{Binding PicPath}"
+                           Text="{Binding Description}" 
+                           TextColor="Black"/>
+        </DataTemplate>
+    </ListView.ItemTemplate> 
+  </ListView>
+</ContentPage>
