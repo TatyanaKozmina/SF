@@ -1,7 +1,8 @@
 using AutoMapper;
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
-using BlogAppAPI.Contracts.Roles;
+using BlogAppAPI.Contracts.Roles.Requests;
+using BlogAppAPI.Contracts.Roles.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers

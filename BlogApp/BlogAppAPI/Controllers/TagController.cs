@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
-using BlogAppAPI.Contracts.Tags;
+using BlogAppAPI.Contracts.Tags.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers
 {
-	[ApiController]
+    [ApiController]
     [Route("api/[controller]")]
     
     public class TagController : ControllerBase

@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
-using BlogAppAPI.Contracts.Users;
+using BlogAppAPI.Contracts.Users.Requests;
+using BlogAppAPI.Contracts.Users.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers
 {
-	[ApiController]
+    [ApiController]
     [Route("api/[controller]")]    
     public class UserController : ControllerBase
     {

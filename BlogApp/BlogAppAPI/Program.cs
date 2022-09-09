@@ -1,5 +1,6 @@
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Repos;
+using BlogAppAPI;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ builder.Services.AddSingleton<IUserRepo, UserRepo>();
 builder.Services.AddSingleton<IArticleRepo, ArticleRepo>();
 builder.Services.AddSingleton<ICommentRepo, CommentRepo>();
 builder.Services.AddSingleton<ITagRepo, TagRepo>();
-builder.Services.AddAutoMapper(typeof(BlogAppAPI.Contracts.MappingProfile));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

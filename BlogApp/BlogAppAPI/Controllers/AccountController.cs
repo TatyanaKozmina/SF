@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
-using BlogAppAPI.Contracts.Account;
+using BlogAppAPI.Contracts.Account.Request;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace BlogAppAPI.Controllers
 {
-	[ApiController]
+    [ApiController]
     [Route("api/[controller]")]
     
     public class AccountController : ControllerBase

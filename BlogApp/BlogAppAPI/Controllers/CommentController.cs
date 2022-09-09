@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
-using BlogAppAPI.Contracts.Comments;
+using BlogAppAPI.Contracts.Comments.Requests;
+using BlogAppAPI.Contracts.Comments.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
