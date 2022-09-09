@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
     public class CommentController : ControllerBase
     {
         private readonly ICommentRepo repo;
@@ -47,7 +48,7 @@ namespace BlogAppAPI.Controllers
         {
             var item = mapper.Map<AddCommentRequest, Comment>(value);
             await repo.Create(item);
-            return StatusCode(200, "Комментарий добавлен");
+            return StatusCode(200, "Comment created");
         }
 
         // PUT api/<CommentController>/5
@@ -57,7 +58,7 @@ namespace BlogAppAPI.Controllers
             var item = mapper.Map<PutCommentRequest, Comment>(value);
             item.Id = id;
             await repo.Update(item);
-            return StatusCode(200, "Комментарий изменён");
+            return StatusCode(200, "Comment modified");
         }
 
         // DELETE api/<CommentController>/5
@@ -65,7 +66,7 @@ namespace BlogAppAPI.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             await repo.Delete(id);
-            return StatusCode(200, "Комментарий удалён");
+            return StatusCode(200, "Comment deleted");
         }
     }
 }

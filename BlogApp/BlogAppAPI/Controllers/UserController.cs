@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+	[ApiController]
+    [Route("api/[controller]")]    
     public class UserController : ControllerBase
     {
-        private IUserRepo repo;
-        private IMapper mapper;
+        private readonly IUserRepo repo;
+        private readonly IMapper mapper;
 
         public UserController(IUserRepo repo, IMapper mapper)
         {
@@ -45,7 +45,7 @@ namespace BlogAppAPI.Controllers
         {
             var user = mapper.Map<User>(value);
             await repo.Create(user);
-            return StatusCode(200, "Пользователь добавлен");
+            return StatusCode(200, "User created");
         }
 
         // PUT api/<UserController>/5
@@ -55,7 +55,7 @@ namespace BlogAppAPI.Controllers
             var user = mapper.Map<User>(value);
             user.Id = id;
             await repo.Update(user);
-            return StatusCode(200, "Пользователь изменён");
+            return StatusCode(200, "User modified");
         }
 
         // PUT api/<UserController>/5/модератор
@@ -64,7 +64,7 @@ namespace BlogAppAPI.Controllers
         public async Task<IActionResult> GrantRole(Guid id, string roleName)
         {
             await repo.GrantRole(id, roleName);
-            return StatusCode(200, "Роль добавлена");
+            return StatusCode(200, "Role granted");
         }
 
         // DELETE api/<UserController>/5
@@ -72,7 +72,7 @@ namespace BlogAppAPI.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             await repo.Delete(id);
-            return StatusCode(200, "Пользователь удалён");
+            return StatusCode(200, "User deleted");
         }
     }
 }

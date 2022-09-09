@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers
 {
+	[ApiController]
     [Route("api/[controller]")]
-    [ApiController]
+    
     public class TagController : ControllerBase
     {
         private readonly ITagRepo repo;
@@ -41,7 +42,7 @@ namespace BlogAppAPI.Controllers
         {
             var item = mapper.Map<AddTagRequest, Tag>(value);
             await repo.Create(item);
-            return StatusCode(200, "Тэг добавлен");
+            return StatusCode(200, "Tag created");
         }
 
         // PUT api/<TagController>/5
@@ -50,7 +51,7 @@ namespace BlogAppAPI.Controllers
         {
             var item = mapper.Map<PutTagRequest, Tag>(value);
             await repo.Update(item, new BlogApp.Data.Queries.UpdateTagQuery(value.NewText));
-            return StatusCode(200, "Тэг изменён");
+            return StatusCode(200, "Tag modified");
         }
 
         // DELETE api/<TagController>/5
@@ -58,7 +59,7 @@ namespace BlogAppAPI.Controllers
         public async Task<IActionResult> Delete(string text)
         {
             await repo.Delete(text);
-            return StatusCode(200, "Тэг удалён");
+            return StatusCode(200, "Tag deleted");
         }
     }
 }

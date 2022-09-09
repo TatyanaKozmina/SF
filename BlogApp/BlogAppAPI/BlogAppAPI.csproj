@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlogAppData\BlogApp.Data.csproj" />
+    <Reference Include="BlogApp.Data">
+      <HintPath>..\BlogAppData\bin\Debug\net6.0\BlogApp.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

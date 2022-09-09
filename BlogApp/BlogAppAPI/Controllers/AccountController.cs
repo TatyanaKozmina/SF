@@ -9,11 +9,12 @@ using System.Security.Claims;
 
 namespace BlogAppAPI.Controllers
 {
+	[ApiController]
     [Route("api/[controller]")]
-    [ApiController]
+    
     public class AccountController : ControllerBase
     {
-        private IUserRepo repo;
+        private readonly IUserRepo repo;
 
         public AccountController(IUserRepo repo)
         {
@@ -29,7 +30,7 @@ namespace BlogAppAPI.Controllers
             {
                 await Authenticate(user);
 
-                return StatusCode(200, "Вход прошёл успешно");
+                return StatusCode(200, "Login successfull");
             }
             return BadRequest();
         }

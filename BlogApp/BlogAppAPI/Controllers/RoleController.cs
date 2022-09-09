@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
 using BlogAppAPI.Contracts.Roles;
@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class RoleController : ControllerBase
     {
-        private IRoleRepo repo;
-        private IMapper mapper;
+        private readonly IRoleRepo repo;
+        private readonly IMapper mapper;
         public RoleController(IRoleRepo rolerepo, IMapper map)
         {
             repo = rolerepo;
@@ -20,9 +20,9 @@ namespace BlogAppAPI.Controllers
 
         // GET: api/<RoleController>
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Get()
         {
-            var resp = new GetAuthorsReponse
+            var resp = new GetRolesResponse
             {
                 Roles = mapper.Map<List<Role>, List<RoleView>>(await repo.GetAll())
             };
@@ -36,7 +36,7 @@ namespace BlogAppAPI.Controllers
         {
             var item = mapper.Map<Role>(value);
             await repo.Create(item);
-            return StatusCode(200, "Роль добавлена");
+            return StatusCode(200, "Role created");
         }
 
         // PUT api/<RoleController>/5
@@ -46,7 +46,7 @@ namespace BlogAppAPI.Controllers
             var item = mapper.Map<Role>(value);
             item.Id = id;
             await repo.Update(item);
-            return StatusCode(200, "Роль изменена");
+            return StatusCode(200, "Role changed");
         }
 
         // DELETE api/<RoleController>/5
@@ -54,7 +54,7 @@ namespace BlogAppAPI.Controllers
         public async Task<IActionResult> Delete(string name)
         {
             await repo.Delete(name);
-            return StatusCode(200, "Роль удалена");
+            return StatusCode(200, "Role deleted");
         }
     }
 }

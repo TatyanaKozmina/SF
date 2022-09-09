@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers
 {
+	[ApiController]
     [Route("api/[controller]")]
-    [ApiController]
+    
     public class ArticleController : ControllerBase
     {
         private readonly IArticleRepo repo;
@@ -49,7 +50,7 @@ namespace BlogAppAPI.Controllers
         {
             var item = mapper.Map<AddArticleRequest, Article>(value);
             await repo.Create(item);
-            return StatusCode(200, "Статья добавлена");
+            return StatusCode(200, "Article created");
         }
 
         // PUT api/<ArticleController>/5
@@ -59,7 +60,7 @@ namespace BlogAppAPI.Controllers
             var item = mapper.Map<PutArticleRequest, Article>(value);
             item.Id = id;
             await repo.Update(item);
-            return StatusCode(200, "Статья изменена");
+            return StatusCode(200, "Article modified");
         }
 
         // DELETE api/<ArticleController>/5
@@ -67,7 +68,7 @@ namespace BlogAppAPI.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             await repo.Delete(id);
-            return StatusCode(200, "Статья удалена");
+            return StatusCode(200, "Article deleted");
         }
     }
 }

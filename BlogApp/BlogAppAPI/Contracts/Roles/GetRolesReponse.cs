@@ -1,6 +1,6 @@
 ﻿namespace BlogAppAPI.Contracts.Roles
 {
-    public class GetAuthorsReponse
+    public class GetRolesResponse
     {
         public List<RoleView> Roles { get; set; }
     }
