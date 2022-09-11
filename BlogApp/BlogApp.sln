@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApp.Data", "BlogAppData
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogAppAPI", "BlogAppAPI\BlogAppAPI.csproj", "{C1E608C5-DA4C-4ECA-96C9-370B4AB83A00}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogAppWebPages", "..\C#\BlogApp\BlogAppWebPages\BlogAppWebPages.csproj", "{211CF0AD-6956-404F-8EA0-96865E543661}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C1E608C5-DA4C-4ECA-96C9-370B4AB83A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1E608C5-DA4C-4ECA-96C9-370B4AB83A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1E608C5-DA4C-4ECA-96C9-370B4AB83A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{211CF0AD-6956-404F-8EA0-96865E543661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{211CF0AD-6956-404F-8EA0-96865E543661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{211CF0AD-6956-404F-8EA0-96865E543661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{211CF0AD-6956-404F-8EA0-96865E543661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
 using BlogAppAPI.Contracts.Roles.Requests;
@@ -9,11 +9,11 @@ namespace BlogAppAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RoleController : ControllerBase
+    public class RolesController : ControllerBase
     {
         private readonly IRoleRepo repo;
         private readonly IMapper mapper;
-        public RoleController(IRoleRepo rolerepo, IMapper map)
+        public RolesController(IRoleRepo rolerepo, IMapper map)
         {
             repo = rolerepo;
             mapper = map;
@@ -25,9 +25,17 @@ namespace BlogAppAPI.Controllers
         {
             var resp = new GetRolesResponse
             {
-                Roles = mapper.Map<List<Role>, List<RoleView>>(await repo.GetAll())
+                Roles = mapper.Map<List<Role>, List<RoleView>>(await repo.Get())
             };
 
+            return StatusCode(200, resp);
+        }
+
+        // GET: api/<RoleController>/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var resp = mapper.Map<Role, RoleView>(await repo.GetById(id));
             return StatusCode(200, resp);
         }
 
@@ -50,11 +58,11 @@ namespace BlogAppAPI.Controllers
             return StatusCode(200, "Role changed");
         }
 
-        // DELETE api/<RoleController>/5
-        [HttpDelete("{name}")]
-        public async Task<IActionResult> Delete(string name)
+        // DELETE api/<RolesController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            await repo.Delete(name);
+            await repo.Delete(id);
             return StatusCode(200, "Role deleted");
         }
     }

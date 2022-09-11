@@ -67,3 +67,9 @@
 /PicApp/PicApp.Android/obj
 /BlogApp/.vs
 /BlogApp/BlogAppAPI/.vs
+/BlogApp/BlogAppAPI/obj
+/BlogApp/BlogAppData/.vs
+/BlogApp/BlogAppData/obj
+/BlogApp/BlogAppWebPages/.vs
+/BlogApp/BlogAppAPI/bin/Debug/net6.0
+/BlogApp/BlogAppData/bin/Debug/net6.0

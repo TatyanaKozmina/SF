@@ -28,21 +28,26 @@ namespace BlogApp.Data.Repos
                 context.Entry(role).CurrentValues.SetValues(item);
                 await context.SaveChangesAsync();
             }
+        }        
+
+        public async Task<List<Role>> Get()
+        {
+            return await context.Roles.ToListAsync();
         }
 
-        public async Task Delete(string name)
+        public async Task<Role> GetById(Guid id)
         {
-            var role = await context.Roles.Where(r => r.Name == name).FirstOrDefaultAsync();
+            return await context.Roles.FindAsync(id);
+        }
+
+        public async Task Delete(Guid id)
+        {
+            var role = await context.Roles.FindAsync(id);
             if (role != null)
             {
                 context.Roles.Remove(role);
                 await context.SaveChangesAsync();
             }
-        }
-
-        public async Task<List<Role>> GetAll()
-        {
-            return await context.Roles.ToListAsync();
         }
     }
 }

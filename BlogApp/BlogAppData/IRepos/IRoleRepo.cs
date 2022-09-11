@@ -7,7 +7,8 @@ namespace BlogApp.Data.IRepos
     {
         public Task Create(Role item);
         public Task Update(Role item);
-        public Task Delete(string name);
-        public Task<List<Role>> GetAll();
+        public Task Delete(Guid id);
+        public Task<List<Role>> Get();
+        public Task<Role> GetById(Guid id);
     }
 }

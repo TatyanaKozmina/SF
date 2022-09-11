@@ -1,4 +1,6 @@
-﻿namespace BlogAppAPI.Contracts.Roles.Responses
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BlogAppWebPages.ViewModels.RoleViewModels
 {
     public class GetRolesResponse
     {
@@ -8,6 +10,7 @@
     public class RoleView
     {
         public Guid Id { get; set; }
+        [Display(Name = "Название роли")]
         public string Name { get; set; }
     }
 }
