@@ -8,6 +8,7 @@ using BlogAppAPI.Contracts.Comments.Responses;
 using BlogAppAPI.Contracts.Roles.Requests;
 using BlogAppAPI.Contracts.Roles.Responses;
 using BlogAppAPI.Contracts.Tags.Requests;
+using BlogAppAPI.Contracts.Tags.Responses;
 using BlogAppAPI.Contracts.Users.Requests;
 
 namespace BlogAppAPI
@@ -43,6 +44,7 @@ namespace BlogAppAPI
             //Tag mapping
             CreateMap<AddTagRequest, Tag>();
             CreateMap<PutTagRequest, Tag>();
+            CreateMap<Tag, TagView>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace BlogAppAPI.Contracts.Tags.Requests
+﻿namespace BlogAppWebPages.ViewModels.TagViewModels
 {
     public class PutTagRequest
     {
