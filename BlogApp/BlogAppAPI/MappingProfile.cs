@@ -10,6 +10,7 @@ using BlogAppAPI.Contracts.Roles.Responses;
 using BlogAppAPI.Contracts.Tags.Requests;
 using BlogAppAPI.Contracts.Tags.Responses;
 using BlogAppAPI.Contracts.Users.Requests;
+using BlogAppAPI.Contracts.Roles.Models;
 
 namespace BlogAppAPI
 {
@@ -26,6 +27,9 @@ namespace BlogAppAPI
             CreateMap<AddUserRequest, User>();
             CreateMap<PutUserRequest, User>();
             CreateMap<User, Contracts.Users.Responses.UserView>();
+            CreateMap<User, Contracts.Users.Responses.UserRoles>();
+            CreateMap<Role, Contracts.Users.Responses.RoleResp>();
+            CreateMap<UserRole, Role>();
 
             //Article mapping
             CreateMap<AddArticleRequest, Article>();

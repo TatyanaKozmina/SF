@@ -33,10 +33,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Роли</a>
-                        </li>
+                        </li>                          
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Войти</a>
-                        </li>
+                            @if (User.Identity.IsAuthenticated == false)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="UserAccount" asp-action="Login">Вход на сайт</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="UserAccount" asp-action="Logout">Выход</a>
+                            }
+                        </li>        
                     </ul>
                 </div>
             </div>

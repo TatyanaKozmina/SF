@@ -12,5 +12,7 @@ namespace BlogAppWebPages.ViewModels.RoleViewModels
         public Guid Id { get; set; }
         [Display(Name = "Название роли")]
         public string Name { get; set; }
+        [Display(Name = "Описание роли")]
+        public string Description { get; set; }
     }
 }

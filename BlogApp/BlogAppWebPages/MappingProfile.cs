@@ -18,6 +18,11 @@ namespace BlogAppWebPages
             CreateMap<BlogAppAPI.Contracts.Tags.Responses.GetTagResponse, GetTagResponse>();
             CreateMap<TagView, BlogAppAPI.Contracts.Tags.Requests.PutTagRequest>();
             CreateMap<AddTagRequest, BlogAppAPI.Contracts.Tags.Requests.AddTagRequest>();
+
+            //UserAccount mapping
+            CreateMap<ViewModels.UserAccountViewModels.LoginRequest, BlogAppAPI.Contracts.Account.Request.LoginRequest>();
+            CreateMap<ViewModels.UserAccountViewModels.RegisterRequest, BlogAppAPI.Contracts.Users.Requests.AddUserRequest>();
+            CreateMap<ViewModels.UserAccountViewModels.RegisterRequest, ViewModels.UserAccountViewModels.LoginRequest>();
         }
     }
 }

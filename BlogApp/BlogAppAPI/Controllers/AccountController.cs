@@ -15,22 +15,23 @@ namespace BlogAppAPI.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IUserRepo repo;
+        private readonly IMapper mapper;
 
-        public AccountController(IUserRepo repo)
+        public AccountController(IUserRepo repo, IMapper map)
         {
             this.repo = repo;
+            this.mapper = map;
         }
 
         [HttpPost]
-        [Route("authenticate")]
         public async Task<IActionResult> Login(LoginRequest login)
         {
             var user = await repo.GetByEmailPassword(login.Email, login.Password);
             if (user != null)
             {
                 await Authenticate(user);
-
-                return StatusCode(200, "Login successfull");
+                var resp = mapper.Map<User, Contracts.Users.Responses.UserRoles>(user);
+                return StatusCode(200, resp);
             }
             return BadRequest();
         }

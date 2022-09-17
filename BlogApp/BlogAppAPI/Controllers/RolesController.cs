@@ -3,6 +3,7 @@ using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
 using BlogAppAPI.Contracts.Roles.Requests;
 using BlogAppAPI.Contracts.Roles.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAppAPI.Controllers
@@ -21,6 +22,7 @@ namespace BlogAppAPI.Controllers
 
         // GET: api/<RoleController>
         [HttpGet]
+        //[Authorize(Roles = "администратор")]
         public async Task<IActionResult> Get()
         {
             var resp = new GetRolesResponse

@@ -1,7 +1,6 @@
 ﻿using BlogApp.Data.DBContext;
 using BlogApp.Data.IRepos;
 using BlogApp.Data.Models;
-using BlogApp.Data.Queries;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Data.Repos
@@ -24,9 +23,9 @@ namespace BlogApp.Data.Repos
             }
         }
 
-        public async Task Delete(string text)
+        public async Task Delete(Guid id)
         {
-            var item = await context.Tags.Where(t => t.Text.ToUpper() == text.ToUpper()).FirstOrDefaultAsync();
+            var item = await context.Tags.FindAsync(id);
             if (item != null)
             {
                 context.Tags.Remove(item);
@@ -44,14 +43,12 @@ namespace BlogApp.Data.Repos
             return await context.Tags.FindAsync(id);
         }
 
-        public async Task Update(Tag item, UpdateTagQuery query)
+        public async Task Update(Tag item)
         {
-            var tag = await context.Tags.Where(t => t.Text.ToUpper() == item.Text.ToUpper()).FirstOrDefaultAsync();
+            var tag = await context.Tags.FindAsync(item.Id);
             if (tag != null)
             {
-                if (!String.IsNullOrEmpty(query.NewText))
-                    tag.Text = query.NewText;
-                context.Tags.Update(tag);
+                context.Entry(tag).CurrentValues.SetValues(item);
                 await context.SaveChangesAsync();
             }
         }

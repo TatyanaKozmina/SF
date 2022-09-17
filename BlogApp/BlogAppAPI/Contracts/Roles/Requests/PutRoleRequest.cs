@@ -3,5 +3,6 @@
     public class PutRoleRequest
     {
         public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
