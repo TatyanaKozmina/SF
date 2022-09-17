@@ -25,7 +25,9 @@ namespace BlogAppAPI
 
             //User mapping
             CreateMap<AddUserRequest, User>();
-            CreateMap<PutUserRequest, User>();
+            CreateMap<PutUserRequest, User>().
+                ForMember(dest => dest.Email, act => act.Ignore()).
+                ForMember(dest => dest.Password, act => act.Ignore());
             CreateMap<User, Contracts.Users.Responses.UserView>();
             CreateMap<User, Contracts.Users.Responses.UserRoles>();
             CreateMap<Role, Contracts.Users.Responses.RoleResp>();

@@ -1,5 +1,6 @@
 ﻿using BlogAppWebPages.ViewModels.RoleViewModels;
 using BlogAppWebPages.ViewModels.TagViewModels;
+using BlogAppWebPages.ViewModels.UserViewModels;
 
 namespace BlogAppWebPages
 {
@@ -23,6 +24,12 @@ namespace BlogAppWebPages
             CreateMap<ViewModels.UserAccountViewModels.LoginRequest, BlogAppAPI.Contracts.Account.Request.LoginRequest>();
             CreateMap<ViewModels.UserAccountViewModels.RegisterRequest, BlogAppAPI.Contracts.Users.Requests.AddUserRequest>();
             CreateMap<ViewModels.UserAccountViewModels.RegisterRequest, ViewModels.UserAccountViewModels.LoginRequest>();
+
+            //User mapping
+            CreateMap<BlogAppAPI.Contracts.Users.Responses.UserView, UserView>();
+            CreateMap<BlogAppAPI.Contracts.Users.Responses.GetUsersReponse, GetUserResponse>();
+            CreateMap<PutUserRequest, BlogAppAPI.Contracts.Users.Requests.PutUserRequest>();
+            CreateMap<BlogAppAPI.Contracts.Users.Responses.UserView, PutUserRequest>();
         }
     }
 }
