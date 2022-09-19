@@ -1,6 +1,7 @@
 ﻿using BlogAppWebPages.ViewModels.RoleViewModels;
 using BlogAppWebPages.ViewModels.TagViewModels;
 using BlogAppWebPages.ViewModels.UserViewModels;
+using BlogAppWebPages.ViewModels.ArticleViewModels;
 
 namespace BlogAppWebPages
 {
@@ -30,6 +31,14 @@ namespace BlogAppWebPages
             CreateMap<BlogAppAPI.Contracts.Users.Responses.GetUsersReponse, GetUserResponse>();
             CreateMap<PutUserRequest, BlogAppAPI.Contracts.Users.Requests.PutUserRequest>();
             CreateMap<BlogAppAPI.Contracts.Users.Responses.UserView, PutUserRequest>();
+
+            //Article mapping
+            CreateMap<BlogAppAPI.Contracts.Articles.Responses.ArticleView, ArticleView>();
+            CreateMap<BlogAppAPI.Contracts.Articles.Responses.GetArticlesResponse, GetArticleResponse>();
+            CreateMap<BlogAppAPI.Contracts.Articles.Models.ArticleAuthor, ArticleAuthorView>().ReverseMap();
+            CreateMap<BlogAppAPI.Contracts.Articles.Requests.AddArticleRequest, AddArticleRequest>().ReverseMap();
+            CreateMap<BlogAppAPI.Contracts.Articles.Responses.ArticleView, PutArticleRequest>();
+            CreateMap<PutArticleRequest, BlogAppAPI.Contracts.Articles.Requests.PutArticleRequest>();
         }
     }
 }

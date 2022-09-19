@@ -1,0 +1,20 @@
+﻿@model IEnumerable<BlogAppWebPages.ViewModels.ArticleViewModels.ArticleAuthorView>
+
+@{
+    ViewData["Title"] = "_Authors";
+}
+
+<table class="table">    
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>            
+        </tr>
+}
+    </tbody>
+</table>

@@ -23,17 +23,23 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">На главную</a>
                         </li>                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Комментарии</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="Index">Статьи</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tag" asp-action="Index">Тэги</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Пользователи</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Роли</a>
-                        </li>                          
+                        @if(User.IsInRole("администратор") || User.IsInRole("модератор"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Пользователи</a>
+                            </li>
+                        }
+                        @if(User.IsInRole("администратор"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Роли</a>
+                            </li>   
+                        }                                               
                         <li class="nav-item">
                             @if (User.Identity.IsAuthenticated == false)
                             {

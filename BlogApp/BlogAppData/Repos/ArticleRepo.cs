@@ -47,10 +47,9 @@ namespace BlogApp.Data.Repos
             return await context.Articles.Include(a => a.Authors).ToListAsync();
         }
 
-        public async Task<List<Article>> Get(Guid authorid)
+        public async Task<Article> Get(Guid id)
         {
-            var author = await context.Authors.FindAsync(authorid);
-            return await context.Articles.Include(a => a.Authors).Where(a => a.Authors.Contains(author)).ToListAsync();
+            return await context.Articles.FindAsync(id);
         }
 
         public async Task Update(Article item)

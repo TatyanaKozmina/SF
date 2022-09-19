@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BlogAppWebPages.ViewModels.ArticleViewModels.ArticleView>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Статьи</h1>
+
+@if(User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create">Новая статья</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th hidden="hidden">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th hidden="hidden">
+                @Html.DisplayNameFor(model => model.Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Authors)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td hidden="hidden">
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td hidden="hidden">
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @await Html.PartialAsync("_Authors", item.Authors)
+            </td>
+            <td>
+                @if(User.IsInRole("администратор"))
+                {
+                    @Html.ActionLink("Редактировать |", "Edit", new { id = item.Id })
+                }                
+                @Html.ActionLink("Читать", "Details", new { id = item.Id })
+                @if(User.IsInRole("администратор"))
+                {  
+                    @Html.ActionLink("| Удалить", "Delete", new { id = item.Id })
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
